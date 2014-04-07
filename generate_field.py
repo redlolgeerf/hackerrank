@@ -6,7 +6,11 @@ def random_square():
     return int(random.random() * (field_size))
 
 
-def make_field(field_size, target_ammount):
+def make_field(field_size=None, target_ammount=None):
+    if field_size is None or target_ammount is None:
+        field_size = int(random.random() * 10)
+        target_ammount = int(random.random() * field_size / 2)
+
     targets = set([(random_square(), random_square())
                   for x in range(target_ammount)])
 
@@ -34,6 +38,3 @@ if __name__ == '__main__':
     print('Please enter the amount of targets')
     target_ammount = int(sys.stdin.readline())
     print(make_field(field_size, target_ammount))
-else:
-    field_size = int(random.random() * 100)
-    target_ammount = int(random.random() * field_size / 2)
