@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import sys
 import curses
 import time
 
@@ -16,8 +17,14 @@ def paint_field(field, screen):
     screen.refresh()
     time.sleep(0.5)
 
-n = 10
-m = 5
+if len(sys.argv) > 2:
+    n = sys.argv[1]
+    m = sys.argv[2]
+else:
+    print("Please enter the size of the field")
+    n = int(sys.stdin.readline())
+    print("Please enter the amount of targets")
+    m = int(sys.stdin.readline())
 
 bot_x, bot_y, targets = generate_field.gen_coordinates(n, m)
 
