@@ -2,20 +2,33 @@ import random
 import sys
 
 
-def random_square():
-    return int(random.random() * (field_size))
+def random_square(n):
+    return int(random.random() * (n))
 
 
-def make_field(field_size=None, target_ammount=None):
+def gen_coordinates(field_size, target_ammount):
+    targets = set([(random_square(field_size), random_square(field_size))
+                  for x in range(target_ammount)])
+
+    r, c = (random_square(field_size), random_square(field_size))
+
+    return r, c, targets
+
+
+def make_field(field_size=None, bot_x=None, bot_y=None, target_ammount=None):
     if field_size is None or target_ammount is None:
         field_size = int(random.random() * 10)
         target_ammount = int(random.random() * field_size / 2)
 
-    targets = set([(random_square(), random_square())
-                  for x in range(target_ammount)])
+    r, c, targets = gen_coordinates(field_size, target_ammount)
 
-    r, c = (random_square(), random_square())
+    if (bot_x is not None) and (bot_y is not None):
+        r, c = bot_x, bot_y
 
+    return draw_field(field_size, r, c, targets)
+
+
+def draw_field(field_size, r, c, targets):
     field = ''
 
     for y in range(field_size):
@@ -37,4 +50,5 @@ if __name__ == '__main__':
     field_size = int(sys.stdin.readline())
     print('Please enter the amount of targets')
     target_ammount = int(sys.stdin.readline())
-    print(make_field(field_size, target_ammount))
+    print('')
+    print(make_field(field_size=field_size, target_ammount=target_ammount))
