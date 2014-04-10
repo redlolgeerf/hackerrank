@@ -27,7 +27,7 @@ def get_distance(targets, bot_x, bot_y):
     return distances
 
 
-def next_move(bot_x, bot_y, target_x, target_y):
+def single_move(bot_x, bot_y, target_x, target_y):
     cleaned = False
     if bot_x < target_x:
         move = 'RIGHT'
@@ -45,8 +45,6 @@ def next_move(bot_x, bot_y, target_x, target_y):
           bot_y == target_y):
         move = 'CLEAN'
         cleaned = True
-    else:
-        raise Error
     return (bot_x, bot_y, cleaned, move)
 
 
@@ -68,17 +66,29 @@ def parse_grid(field):
 def moves(field=None, target='p'):
     n, r, c, grid = parse_grid(field)
     targets = get_coordinates(n, grid, target)
-    targets = get_distance(targets, r, c)
 
     moves = []
     while targets:
-        target = min(targets, key=lambda x: x[2])
-        targets.remove(target)
+        distances = get_distance(targets, r, c)
+        target = min(distances, key=lambda x: x[2])
+        targets.remove(target[:2])
         cleaned = False
         while not cleaned:
-            r, c, cleaned, move = next_move(r, c, target[0], target[1])
+            r, c, cleaned, move = single_move(r, c, target[0], target[1])
             moves.append(move)
     return moves
+
+
+def next_move(posr, posc, board):
+    n = 5
+    r, c = posc, posr
+
+    targets = get_coordinates(n, board, 'd')
+
+    distances = get_distance(targets, r, c)
+    target = min(distances, key=lambda x: x[2])
+    r, c, cleaned, move = single_move(r, c, target[0], target[1])
+    print(move)
 
 if __name__ == '__main__':
     moves = moves()
