@@ -7,7 +7,7 @@ import sys
 def insert(arr, s):
     value = arr[-1]
     x = -2
-    while (arr[x] > value) and (x * -1 <= s):
+    while (x * -1 <= s) and (arr[x] > value):
         arr[x + 1] = arr[x]
         print(" ".join([str(i) for i in arr]))
         x -= 1
@@ -15,7 +15,7 @@ def insert(arr, s):
     print(" ".join([str(i) for i in arr]))
 
 if __name__ == '__main__':
-#     size = sys.stdin.readline().strip()
+#     size = int(sys.stdin.readline().strip())
 #     array = sys.stdin.readline().strip().split()
 #     array = [int(x) for x in array]
     array = [2, 4, 6, 8, 1]
