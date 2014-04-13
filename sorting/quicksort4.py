@@ -45,15 +45,15 @@ if __name__ == '__main__':
 #     size = int(sys.stdin.readline().strip())
 #     array = sys.stdin.readline().strip().split()
 #     array = [int(i) for i in array]
-#     array = [1, 3, 9, 8, 2, 7, 5]
-    array = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+    array = [1, 3, 9, 8, 2, 7, 5]
+#    array = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 #     print("Quick sort")
 #     print(" ".join([str(i) for i in partition(array, len(array))]))
 #     print(quick_counter)
 #     print("Insert sort")
 #     print(" ".join([str(i) for i in insertion_sort(array, len(array))]))
 #     print(insert_counter)
-    size = 10
+    size = len(array)
     insertion_sort(array, size)
     partition(array, size)
     print(insert_counter - quick_counter)
