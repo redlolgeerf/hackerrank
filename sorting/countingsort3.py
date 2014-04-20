@@ -5,9 +5,9 @@ import sys
 
 
 def counting(arr, s):
-    appearences = {}
+    appearences = []
     for x in range(100):
-        appearences[x] = 0
+        appearences.append(0)
     for value in arr:
         appearences[value] += 1
     return appearences
@@ -18,6 +18,7 @@ if __name__ == '__main__':
     for x in range(size):
         array.append(sys.stdin.readline().strip().split()[0])
     array = [int(i) for i in array]
+
     arr = counting(array, size)
     counter = 0
     result = []
